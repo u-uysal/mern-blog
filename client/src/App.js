@@ -71,9 +71,7 @@ function App() {
               color="secondary"
               className={classes.title}
             >
-              <a href="https://mern-blog-frontend.herokuapp.com/posts">
-                My Blogs
-              </a>
+              <a href="http://localhost:3000/posts">My Blogs</a>
             </Typography>
             <Button
               onClick={handleOpen}

@@ -12,6 +12,9 @@ app.use(cors());
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
+app.get("/", (req, res) => {
+  res.send("it works");
+});
 //mongoose connection
 const URL = process.env.CONNECTDB_URL;
 mongoose
