@@ -13,6 +13,11 @@ const postReducer = (state = initialState, action) => {
         ...state,
         posts: action.payload,
       };
+    case types.CREATE_POST:
+      return {
+        ...state,
+        posts: [...state.posts, action.payload],
+      };
 
     default:
       return {

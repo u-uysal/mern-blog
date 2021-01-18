@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import PenIcon from "@material-ui/icons/Create";
 import PostsList from "./components/PostsList";
+import AddPostForm from "./components/AddPostForm";
+import { useDispatch } from "react-redux";
+import { fetchPosts } from "./actions/post";
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,6 +38,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [dispatch]);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const classes = useStyles();
   return (
     <>
@@ -54,7 +72,12 @@ function App() {
             >
               <a href="http://localhost:3000/posts">My Blogs</a>
             </Typography>
-            <Button color="primary" variant="outlined" startIcon={<PenIcon />}>
+            <Button
+              onClick={handleOpen}
+              color="primary"
+              variant="outlined"
+              startIcon={<PenIcon />}
+            >
               New Post
             </Button>
           </Toolbar>
@@ -70,6 +93,7 @@ function App() {
             </Router>
           </Grid>
         </Grid>
+        <AddPostForm open={open} handleClose={handleClose} />
       </Container>
     </>
   );
