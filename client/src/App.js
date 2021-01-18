@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import PenIcon from "@material-ui/icons/Create";
 import PostsList from "./components/PostsList";
+import PostDetails from "./components/PostDetails";
 import AddPostForm from "./components/AddPostForm";
 import { useDispatch } from "react-redux";
 import { fetchPosts } from "./actions/post";
@@ -87,7 +88,7 @@ function App() {
             <Router>
               <Switch>
                 <Route exact path="/posts" component={PostsList} />
-                {/* <Route exact path="/posts/:id" component={PostDetails} /> */}
+                <Route exact path="/posts/:id" component={PostDetails} />
               </Switch>
               <Redirect from="/" to="/posts" />
             </Router>

@@ -11,6 +11,19 @@ const getPosts = async (req, res) => {
   }
 };
 
+const getSinglePost = async (req, res) => {
+  try {
+    //yeni isimlendirme yapilabilir
+    const { id: _id } = req.params;
+    const post = await Post.findById(_id);
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(404).json({
+      message: error.message,
+    });
+  }
+};
+
 const createPost = async (req, res) => {
   const post = req.body;
   const newPost = new Post(post);
@@ -23,8 +36,34 @@ const createPost = async (req, res) => {
     });
   }
 };
+const deletePost = async (req, res) => {
+  const { id: _id } = req.params;
+  try {
+    const deletedPost = await Post.findByIdAndRemove(_id);
+    res.json(deletedPost);
+  } catch (error) {
+    res.status(409).json({
+      message: error.message,
+    });
+  }
+};
+const updatePost = async (req, res) => {
+  const { id: _id } = req.params;
+  const post = req.body;
+  try {
+    const updatedPost = await Post.findByIdAndUpdate(_id, post, { new: true });
+    res.json(updatedPost);
+  } catch (error) {
+    res.status(409).json({
+      message: error.message,
+    });
+  }
+};
 
 module.exports = {
   createPost,
   getPosts,
+  deletePost,
+  updatePost,
+  getSinglePost,
 };
