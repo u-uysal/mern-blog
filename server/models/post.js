@@ -1,33 +1,17 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
-const postSchema = new Schema(
-  {
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      minlength: 3,
-    },
-    subtitle: {
-      type: String,
-    },
-    content: {
-      type: String,
-    },
-    tag: {
-      type: String,
-    },
-    image: {
-      type: String,
-    },
+const postSchema = new Schema({
+  title: String,
+  subtitle: String,
+  content: String,
+  tag: String,
+  image: String,
+  createdAt: {
+    type: Date,
+    default: new Date(),
   },
-  {
-    timestamps: true,
-  }
-);
+});
 
 const Post = mongoose.model("Post", postSchema);
 
