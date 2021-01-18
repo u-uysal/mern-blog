@@ -10,6 +10,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+//mongoose connection
 const URL = process.env.CONNECTDB_URL;
 mongoose
   .connect(URL, {
@@ -24,6 +25,11 @@ mongoose
     console.log(err.message);
   });
 
+//router
+const postRouter = require("./routes/post");
+app.use("/posts", postRouter);
+
+//listening
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
